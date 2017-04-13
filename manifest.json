@@ -1,0 +1,17 @@
+{
+  "manifest_version": 2,
+  "name": "Shanbay",
+  "version": "1.0",
+  "description": "Biu",
+  "content_scripts": [
+    {
+      "matches": ["https://www.theguardian.com/*"],
+      "js": ["js/simplifyContent.js"],
+      "css": ["style.css"]
+    }
+  ],
+  "permissions": [
+    "https://www.shanbay.com/*",
+    "https://media-audio1.baydn.com/*"
+  ]
+}

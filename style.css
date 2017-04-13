@@ -1,0 +1,60 @@
+/*delete*/
+#adContent,#bannerandheader{
+    display: none;
+}
+
+.selection-sharing,.element-rich-link,.ad-slot,.content__section-label,.site-message,.content__meta-container,.element-rich-link,.content__secondary-column,.contributions__epic,.content-footer,.l-footer,.submeta{
+    display: none;
+}
+
+/*end*/
+
+.pagination-i{
+    position: fixed;
+    width: 60px;
+    background: #00bfff;
+    right: 100px;
+    bottom: 100px;
+}
+.container a{
+    text-align: center;
+    display: inline-block;
+    width: 100%;
+    color: #fff;
+    text-decoration: none;
+    line-height: 20px;
+}
+.container p{
+    margin: 0;
+    text-align: center;
+}
+.container{
+    color: #fff;
+}
+.back-top{
+    background: #00caab;
+    text-align: center;
+}
+.back-top a{
+    margin: 0;
+    line-height: 20px;
+
+}
+.page-number{
+    position: relative;
+}
+
+
+/**
+part 2
+ */
+
+
+.tip-def{
+    position: absolute;
+    background: #00bfff;
+    border-radius: 10px;
+}
+.def p{
+    color: #fff;
+}
