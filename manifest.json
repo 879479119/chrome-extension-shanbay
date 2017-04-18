@@ -5,13 +5,18 @@
   "description": "Biu",
   "content_scripts": [
     {
-      "matches": ["https://www.theguardian.com/*"],
-      "js": ["js/simplifyContent.js"],
+      "matches": ["https://www.theguardian.com/*","https://www.baidu.com/*"],
+      "js": ["js/pagination.js","js/wordSearch.js","js/simplifyContent.js"],
       "css": ["style.css"]
     }
   ],
   "permissions": [
     "https://www.shanbay.com/*",
-    "https://media-audio1.baydn.com/*"
-  ]
+    "https://media-audio1.baydn.com/*",
+    "storage"
+  ],
+  "browser_action": {
+    "default_title": "Filter",
+    "default_popup": "popup.html"
+  }
 }

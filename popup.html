@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <style>
+        body{
+            margin: 0;
+            padding: 0;
+            width: 120px;
+            height: 60px;
+        }
+        ul{
+            margin: 0 auto;
+            padding: 0;
+            width: 100px;
+        }
+        li{
+            list-style: none;
+            margin-top: 6px;
+        }
+        li:last-child{
+            margin-bottom: 6px;
+        }
+        a{
+            display: block;
+            background: #b3fdff;
+            border-radius: 3px;
+            text-align: center;
+            line-height: 16px;
+            font-size: 12px;
+            color: #fff;
+            text-decoration: none;
+        }
+        a.active{
+            background: #00caab;
+        }
+    </style>
+</head>
+<body>
+<ul>
+    <li><a href="#" class="closeFilter">关闭过滤</a></li>
+    <li><a href="#" class="adsFilter">省略广告</a></li>
+    <li><a href="#" class="forceFilter">强制过滤</a></li>
+</ul>
+<script src="js/popup.js"></script>
+</body>
+</html>
