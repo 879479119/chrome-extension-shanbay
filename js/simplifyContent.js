@@ -50,5 +50,5 @@ window.addEventListener("resize",function (e) {
 	}
 });
 
-//since it takes some time to hide the parts we don't need
-setTimeout(paginationInit,1000);
+//it takes some time to hide the parts we don't need
+setTimeout(paginationInit,2000);

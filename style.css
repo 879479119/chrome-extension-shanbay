@@ -40,9 +40,37 @@ part 2
  */
 .tip-def {
   position: absolute;
-  background: #00bfff;
-  border-radius: 10px; }
-  .tip-def .def p {
-    color: #fff; }
+  background: rgba(0, 0, 0, 0.8);
+  border-radius: 3px;
+  width: 180px;
+  height: 100px;
+  font-size: 12px;
+  color: #fff;
+  overflow: hidden;
+  padding: 10px; }
+  .tip-def p {
+    margin-bottom: 0;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden; }
+  .tip-def .word-content {
+    font-size: 14px;
+    color: #00caab; }
+  .tip-def .play small {
+    color: gray; }
+  .tip-def .play span {
+    display: inline-block;
+    width: 2px;
+    height: 4px;
+    margin-left: 2px;
+    border-right: solid 4px #fff;
+    border-bottom: solid 4px transparent;
+    border-top: solid 4px transparent; }
+    .tip-def .play span:before {
+      display: block;
+      content: '';
+      width: 2px;
+      height: 4px;
+      background: #fff; }
 
 /*# sourceMappingURL=style.css.map */

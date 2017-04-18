@@ -1,9 +1,9 @@
 function wordSearchInit () {
 
-	document.querySelector('.content__main-column').addEventListener("click",function (e) {
-		//clear the old one
+	document.addEventListener("click",function (e) {
+		//
 		var old = document.querySelector('.tip-def');
-		old && old.remove();
+		old && !isChildOf(e.target, old) && old.remove();
 
 		var select = window.getSelection();
 		var offset = select.anchorOffset,
@@ -14,17 +14,35 @@ function wordSearchInit () {
 		while(reg.exec(content)){
 			if(reg.lastIndex > offset){
 				//maybe we don't need lowercase ?
-				word = content.slice(lastPos, reg.lastIndex).trim().toLowerCase();
-				console.log(word);
+				word = content.slice(lastPos, reg.lastIndex).match(/\w+/g)[0].toLowerCase();
+
 				break;
 			}
 			lastPos = reg.lastIndex
 		}
+
+		if(word === null){
+			return
+		}
+
 		var _ = Date.now();
 
-		console.log(e);
-		var oX = e.offsetX,
-			oY = e.offsetY;
+		var clientWidth = document.documentElement.clientWidth,
+			clientHeight = document.documentElement.clientHeight,
+			clientX = e.clientX,
+			clientY = e.clientY;
+		var oX = e.pageX,
+			oY = e.pageY,
+			fontSize = parseInt(e.target.ownerDocument.defaultView.getComputedStyle(e.target,e.target.nodeName)['font-size']);
+
+		if(clientWidth < clientX + 200 + 20){
+			oX -= 200
+		}
+		if(clientHeight< clientY + 120 + fontSize){
+			oY -= 120 - fontSize
+		}else{
+			oY += fontSize * 0.8
+		}
 
 		fetch("https://www.shanbay.com/api/v1/bdc/search/?version=2&word="+word+"&_="+_).then(function (e) {
 			return e.json()
@@ -32,26 +50,30 @@ function wordSearchInit () {
 			if(res.status_code === 0){
 				var def = res.data.definitions.cn[0].defn,
 					source = res.data.audio_addresses.uk[0];
-				console.log(def,source);
+				var mean = '';
+				res.data.definitions.cn.forEach(function (item, index) {
+					if(index > 2) return ;
+					mean += '<p><span>'+item.pos+'</span>';
+					mean += item.defn+'</p>';
+				});
 
 				var template =
-					'<div class="def">\
-						<p>'+def+'</p>\
-					<a href="javascript:;" class="play_audio">play</a>\
-				</div>';
-
+					'<p class="word-content">'+res.data.content+'</p>' +
+					'<p class="play">' +
+						'<small>uk:</small>\\'+res.data.pronunciations.uk+'\\<span class="audio-play" data-url="'+res.data.audio_addresses.uk[0]+'" ></span>&nbsp;&nbsp;&nbsp;' +
+						'<small>us:</small>\\'+res.data.pronunciations.us+'\\<span class="audio-play" data-url="'+res.data.audio_addresses.us[0]+'" ></span>\
+					</p>\
+					<div class="def">'+mean+'</div>';
 
 				var page = document.createElement('div');
 				page.classList.add('tip-def');
 				page.innerHTML = template;
 				page.style.left = oX+'px';
 				page.style.top = oY+'px';
-				e.target.style.position = "relative";
-				e.target.appendChild(page);
-
-				simpleSound(source);
+				// e.target.style.position = "relative";
+				document.body.appendChild(page);
 			}else{
-				console.error("Network ?")
+				console.error("Network or no word matched")
 			}
 		})
 	});
@@ -61,6 +83,28 @@ function wordSearchInit () {
 		audio.src = source;
 		audio.setAttribute("autoplay", "true");
 		document.querySelector('body').appendChild(audio);
+		audio.addEventListener("ended",function () {
+			audio.remove()
+		})
 	}
 
+	function isChildOf(child, parent) {
+		var parentNode;
+		if(child && parent) {
+			parentNode = child.parentNode;
+			while(parentNode) {
+				if(parent === parentNode) {
+					return true;
+				}
+				parentNode = parentNode.parentNode;
+			}
+		}
+		return false;
+	}
+
+	document.querySelector('body').addEventListener('click',function (e) {
+		if(e.target.className.indexOf('audio-play') > -1){
+			simpleSound(e.target.getAttribute('data-url'))
+		}
+	})
 }
