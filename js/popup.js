@@ -32,7 +32,11 @@ function sendMessage(msg, callback) {
 
 document.querySelector('ul').addEventListener('click',function (evt) {
 	if(evt.target.nodeName.toLowerCase() === "a"){
-		window[evt.target.className]()
+		window[evt.target.getAttribute('data-action')]();
+		Array.prototype.map.call(document.querySelectorAll('a'),function (item) {
+			item.classList.remove('active');
+		});
+		evt.target.classList.add('active');
 	}
 });
 

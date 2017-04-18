@@ -6,7 +6,7 @@ chrome.runtime.onMessage.addListener(function(request, sender, sendResponse) {
 	chrome.storage.sync.set(request, function (err) {
 		location.reload();
 	});
-	sendResponse({farewell:134})
+	// sendResponse()
 });
 
 
@@ -28,3 +28,27 @@ chrome.storage.sync.get('level',function (res) {
 	}
 });
 
+/**
+ * init word search
+ */
+wordSearchInit();
+
+/**
+ * init the pagination and reload when user resize window
+ */
+
+
+var running = false;
+window.addEventListener("resize",function (e) {
+	console.log("all work should be done after resize");
+	if(running === false) {
+		running = true;
+		paginationInit();
+		setTimeout(function () {
+			running = false
+		},200);
+	}
+});
+
+//since it takes some time to hide the parts we don't need
+setTimeout(paginationInit,1000);

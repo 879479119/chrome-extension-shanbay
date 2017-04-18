@@ -1,4 +1,4 @@
-(function () {
+function paginationInit () {
 	function temp(anchor) {
 		var template1 =
 			' <div class="container">\
@@ -17,15 +17,21 @@
 		count = Math.floor(total/ clitn);
 
 	var str = "";
-	for(var i = 0;i < count;i ++){
+	for(var i = 0;i <= count;i ++){
 		str += "<a href='javascript:;' data-height='"+i*clitn+"'>"+(i+1)+"</a>";
 	}
 
 	var page = document.createElement('div');
 	page.classList.add('pagination-i');
 	page.innerHTML = temp(str);
-	document.querySelector('body').appendChild(page);
 
+	try{
+		document.querySelector('.pagination-i').remove();
+	}catch(e){
+		console.log('first Time');
+	}
+
+	document.querySelector('body').appendChild(page);
 	page.addEventListener("click",function (e) {
 		console.log(e.target);
 		var h;
@@ -34,4 +40,4 @@
 			window.scrollTo(0,h);
 		}
 	});
-})();
+}

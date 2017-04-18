@@ -1,60 +1,48 @@
-/*delete*/
-#adContent,#bannerandheader{
-    display: none;
-}
+.none, .shanbay-filter-prefixer-0 .top-banner-ad-container, .shanbay-filter-prefixer-0 .ad-slot, .shanbay-filter-prefixer-0 #google_center_div, .shanbay-filter-prefixer-0 #popular-trails__mpu, .shanbay-filter-prefixer-0 #adContent, .shanbay-filter-prefixer-0 #bannerandheader, .shanbay-filter-prefixer-1 .selection-sharing, .shanbay-filter-prefixer-1 .element-rich-link, .shanbay-filter-prefixer-1 .ad-slot, .shanbay-filter-prefixer-1 .content__section-label, .shanbay-filter-prefixer-1 .site-message, .shanbay-filter-prefixer-1 .content__meta-container, .shanbay-filter-prefixer-1 .content__secondary-column, .shanbay-filter-prefixer-1 .contributions__epic, .shanbay-filter-prefixer-1 .content-footer, .shanbay-filter-prefixer-1 .l-footer, .shanbay-filter-prefixer-1 .submeta {
+  display: none; }
 
-.selection-sharing,.element-rich-link,.ad-slot,.content__section-label,.site-message,.content__meta-container,.element-rich-link,.content__secondary-column,.contributions__epic,.content-footer,.l-footer,.submeta{
-    display: none;
-}
+.pagination-i {
+  position: fixed;
+  width: 60px;
+  background: #00bfff;
+  right: 5vw;
+  bottom: 5vh;
+  overflow: auto;
+  max-height: 200px; }
+  .pagination-i .container {
+    color: #fff; }
+    .pagination-i .container p {
+      margin: 0;
+      text-align: center; }
+    .pagination-i .container a {
+      text-align: center;
+      display: inline-block;
+      width: 100%;
+      color: #fff;
+      text-decoration: none;
+      line-height: 20px; }
 
-/*end*/
-
-.pagination-i{
-    position: fixed;
-    width: 60px;
-    background: #00bfff;
-    right: 100px;
-    bottom: 100px;
-}
-.container a{
-    text-align: center;
-    display: inline-block;
-    width: 100%;
-    color: #fff;
-    text-decoration: none;
-    line-height: 20px;
-}
-.container p{
+@media screen and (max-width: 740px) {
+  .pagination-i {
+    background: rgba(0, 0, 0, 0.5); } }
+.back-top {
+  background: #00caab;
+  text-align: center; }
+  .back-top a {
     margin: 0;
-    text-align: center;
-}
-.container{
-    color: #fff;
-}
-.back-top{
-    background: #00caab;
-    text-align: center;
-}
-.back-top a{
-    margin: 0;
-    line-height: 20px;
+    line-height: 20px; }
 
-}
-.page-number{
-    position: relative;
-}
-
+.page-number {
+  position: relative; }
 
 /**
 part 2
  */
+.tip-def {
+  position: absolute;
+  background: #00bfff;
+  border-radius: 10px; }
+  .tip-def .def p {
+    color: #fff; }
 
-
-.tip-def{
-    position: absolute;
-    background: #00bfff;
-    border-radius: 10px;
-}
-.def p{
-    color: #fff;
-}
+/*# sourceMappingURL=style.css.map */

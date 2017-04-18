@@ -1,6 +1,6 @@
-(function () {
+function wordSearchInit () {
 
-	document.addEventListener("click",function (e) {
+	document.querySelector('.content__main-column').addEventListener("click",function (e) {
 		//clear the old one
 		var old = document.querySelector('.tip-def');
 		old && old.remove();
@@ -56,10 +56,6 @@
 		})
 	});
 
-	window.addEventListener("resize",function (e) {
-		console.log("all work should be done after resize")
-	});
-
 	function simpleSound(source) {
 		var audio = document.createElement('audio');
 		audio.src = source;
@@ -67,4 +63,4 @@
 		document.querySelector('body').appendChild(audio);
 	}
 
-})();
+}
