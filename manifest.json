@@ -5,7 +5,7 @@
   "description": "Biu",
   "content_scripts": [
     {
-      "matches": ["https://www.theguardian.com/*","https://www.baidu.com/*"],
+      "matches": ["https://www.theguardian.com/*"],
       "js": ["js/pagination.js","js/wordSearch.js","js/simplifyContent.js"],
       "css": ["style.css"]
     }
