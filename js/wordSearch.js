@@ -1,15 +1,18 @@
 function wordSearchInit () {
 
 	document.addEventListener("click",function (e) {
-		//
+		//点击事件
 		var old = document.querySelector('.tip-def');
+		//去掉旧的标签，点击框内时不消失
 		old && !isChildOf(e.target, old) && old.remove();
 
+		//处理选取内容
 		var select = window.getSelection();
 		var offset = select.anchorOffset,
 			node = select.anchorNode,
 			content = node.textContent;
 		var word = null;
+		//一个单词一个单词往后匹配（没有考虑中文）
 		var lastPos = 0, reg = /\w+/g;
 		while(reg.exec(content)){
 			if(reg.lastIndex > offset){
@@ -20,13 +23,13 @@ function wordSearchInit () {
 			}
 			lastPos = reg.lastIndex
 		}
-
+		//如果点击空白处没有匹配到单词就不管他
 		if(word === null){
 			return
 		}
 
 		var _ = Date.now();
-
+		//获取判断框位置的各个参数
 		var clientWidth = document.documentElement.clientWidth,
 			clientHeight = document.documentElement.clientHeight,
 			clientX = e.clientX,
@@ -34,7 +37,7 @@ function wordSearchInit () {
 		var oX = e.pageX,
 			oY = e.pageY,
 			fontSize = parseInt(e.target.ownerDocument.defaultView.getComputedStyle(e.target,e.target.nodeName)['font-size']);
-
+		//偏移框的位置（框的大小是固定的）
 		if(clientWidth < clientX + 200 + 20){
 			oX -= 200
 		}
@@ -43,14 +46,16 @@ function wordSearchInit () {
 		}else{
 			oY += fontSize * 0.8
 		}
-
+		//使用fetch获取接口数据
 		fetch("https://www.shanbay.com/api/v1/bdc/search/?version=2&word="+word+"&_="+_).then(function (e) {
 			return e.json()
 		}).then(function (res) {
+			//获取成功时，展示数据处理
 			if(res.status_code === 0){
 				var def = res.data.definitions.cn[0].defn,
 					source = res.data.audio_addresses.uk[0];
 				var mean = '';
+				//超过三条以上的数据过滤掉
 				res.data.definitions.cn.forEach(function (item, index) {
 					if(index > 2) return ;
 					mean += '<p><span>'+item.pos+'</span>';
@@ -73,11 +78,13 @@ function wordSearchInit () {
 				// e.target.style.position = "relative";
 				document.body.appendChild(page);
 			}else{
+				//网络失败或没有单词的错误处理
 				console.error("Network or no word matched")
 			}
 		})
 	});
 
+	//简单添加audio播放声音
 	function simpleSound(source) {
 		var audio = document.createElement('audio');
 		audio.src = source;
@@ -88,6 +95,7 @@ function wordSearchInit () {
 		})
 	}
 
+	//判断子DOM
 	function isChildOf(child, parent) {
 		var parentNode;
 		if(child && parent) {
@@ -102,6 +110,7 @@ function wordSearchInit () {
 		return false;
 	}
 
+	//额外绑定的点击事件，点击播放声音
 	document.querySelector('body').addEventListener('click',function (e) {
 		if(e.target.className.indexOf('audio-play') > -1){
 			simpleSound(e.target.getAttribute('data-url'))
